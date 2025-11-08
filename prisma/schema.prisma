@@ -1,0 +1,158 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --------------------------------------
+// AUTHENTICATION
+// --------------------------------------
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// --------------------------------------
+// TALENT MANAGEMENT
+// --------------------------------------
+model Talent {
+  id           String     @id @default(cuid())
+  name         String
+  slug         String     @unique
+  bio          String     @db.Text
+  profileImage String
+  categories   Category[] @relation("TalentCategories")
+
+  skills     String[]
+  experience String?    @db.Text
+  height     String?
+  age        Int?
+  location   String?
+  email      String?
+  phone      String?
+  socialMedia Json?
+  awards     String?    @db.Text
+
+  images Image[]
+  reels  Reel[]
+
+  inquiries Inquiry[]
+
+  featured  Boolean  @default(false)
+  views     Int      @default(0)
+  published Boolean  @default(true)
+
+  seoTitle       String?
+  seoDescription String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  talents     Talent[] @relation("TalentCategories")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Image {
+  id       String   @id @default(cuid())
+  url      String
+  publicId String
+  caption  String?
+  order    Int      @default(0)
+  talentId String
+  talent   Talent   @relation(fields: [talentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Reel {
+  id          String   @id @default(cuid())
+  title       String
+  url         String
+  publicId    String
+  thumbnail   String?
+  duration    Int?
+  description String?
+  order       Int      @default(0)
+  talentId    String
+  talent      Talent   @relation(fields: [talentId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+// --------------------------------------
+// BLOG MANAGEMENT
+// --------------------------------------
+model BlogPost {
+  id            String         @id @default(cuid())
+  title         String
+  slug          String         @unique
+  excerpt       String?
+  content       String         @db.Text
+  featuredImage String?
+  author        String
+  categories    BlogCategory[] @relation("BlogCategories")
+  tags          String[]
+
+  published   Boolean  @default(false)
+  views       Int      @default(0)
+  publishedAt DateTime?
+
+  seoTitle       String?
+  seoDescription String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BlogCategory {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  posts       BlogPost[] @relation("BlogCategories")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// --------------------------------------
+// INQUIRIES & ANALYTICS
+// --------------------------------------
+model Inquiry {
+  id        String    @id @default(cuid())
+  talentId  String? // Optional: for general inquiries
+  talent    Talent?   @relation(fields: [talentId], references: [id], onDelete: SetNull) // SetNull so we don't lose inquiry if talent is deleted
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  message   String    @db.Text
+  eventType String?
+  eventDate DateTime?
+  budget    String?
+  status    String    @default("new")
+  notes     String?   @db.Text
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Analytics {
+  id         String   @id @default(cuid())
+  type       String
+  entityId   String
+  entityType String 
+  metadata   Json?
+  createdAt  DateTime @default(now())
+}
