@@ -7,7 +7,7 @@ import { BlogSearch } from "../components/blog-search";
 import { BlogFilters } from "../components/blog-filters";
 
 type BlogPageProps = {
-  searchParams?: {
+  searchParams: {
     query?: string;
     category?: string;
     sort?: string;

@@ -7,7 +7,7 @@ import { TalentSearch } from "../components/talent-search";
 import { TalentFilters } from "../components/talent-filters";
 
 type TalentsPageProps = {
-  searchParams?: {
+  searchParams: {
     query?: string;
     category?: string;
     sort?: string;
