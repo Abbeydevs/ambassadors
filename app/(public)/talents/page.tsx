@@ -7,17 +7,18 @@ import { TalentSearch } from "../components/talent-search";
 import { TalentFilters } from "../components/talent-filters";
 
 type TalentsPageProps = {
-  searchParams: {
+  searchParams: Promise<{
     query?: string;
     category?: string;
     sort?: string;
-  };
+  }>;
 };
 
 export default async function TalentsPage({ searchParams }: TalentsPageProps) {
-  const query = searchParams?.query;
-  const categorySlug = searchParams?.category;
-  const sort = searchParams?.sort;
+  const params = await searchParams;
+  const query = params?.query;
+  const categorySlug = params?.category;
+  const sort = params?.sort;
 
   const where: any = {
     published: true,

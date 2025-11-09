@@ -7,17 +7,18 @@ import { BlogSearch } from "../components/blog-search";
 import { BlogFilters } from "../components/blog-filters";
 
 type BlogPageProps = {
-  searchParams: {
+  searchParams: Promise<{
     query?: string;
     category?: string;
     sort?: string;
-  };
+  }>;
 };
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const query = searchParams?.query;
-  const categorySlug = searchParams?.category;
-  const sort = searchParams?.sort;
+  const params = await searchParams;
+  const query = params?.query;
+  const categorySlug = params?.category;
+  const sort = params?.sort;
 
   const where: any = {
     published: true,
