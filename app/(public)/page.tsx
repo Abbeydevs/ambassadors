@@ -7,18 +7,40 @@ import HeroSection from "./components/hero-section";
 import Navbar from "./components/navbar";
 import StatsSection from "./components/stats-section";
 import TestimonialsSection from "./components/testimonial-section";
+import { prisma } from "@/lib/prisma";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredTalents = await prisma.talent.findMany({
+    where: {
+      featured: true,
+      published: true,
+    },
+    take: 4,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const recentPosts = await prisma.blogPost.findMany({
+    where: {
+      published: true,
+    },
+    take: 3,
+    orderBy: {
+      publishedAt: "desc",
+    },
+  });
+
   return (
     <div className="min-h-screen bg-slate-950">
       <Navbar />
       <main>
         <HeroSection />
-        <FeaturedTalents />
+        <FeaturedTalents talents={featuredTalents} />
         <CategoriesSection />
         <StatsSection />
         <TestimonialsSection />
-        <BlogPreview />
+        <BlogPreview posts={recentPosts} />
         <CTASection />
       </main>
       <Footer />

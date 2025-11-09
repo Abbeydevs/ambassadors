@@ -14,6 +14,7 @@ import { useFormStatus } from "react-dom";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { createBlogPost, updateBlogPost } from "@/lib/action";
+import { ImageUploader } from "@/app/(admin)/components/image-uploader";
 
 type PostWithCategories = BlogPost & {
   categories: BlogCategory[];
@@ -119,12 +120,9 @@ export function BlogPostForm({ categories, post }: BlogPostFormProps) {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="featuredImage">Featured Image URL</Label>
-              <Input
-                id="featuredImage"
+              <Label>Featured Image</Label>
+              <ImageUploader
                 name="featuredImage"
-                placeholder="https://... (Temporary)"
-                className="bg-slate-800 border-slate-700"
                 defaultValue={post?.featuredImage ?? ""}
               />
             </div>

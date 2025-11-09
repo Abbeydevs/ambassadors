@@ -149,9 +149,7 @@ export default async function TalentsPage() {
                               <Edit className="mr-2 h-4 w-4" /> Edit
                             </Link>
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-red-400 focus:bg-red-900/50 focus:text-red-400 flex items-center">
-                            <DeleteTalentButton id={talent.id} />
-                          </DropdownMenuItem>
+                          <DeleteTalentButton id={talent.id} />
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>

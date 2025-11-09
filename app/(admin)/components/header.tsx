@@ -13,7 +13,7 @@ import {
 import { LogOut, Menu, UserCircle } from "lucide-react";
 import { useState } from "react";
 import { AdminSidebarNav } from "./sidebar-nav";
-import { signOutAction } from "@/lib/action";
+import { signOut } from "next-auth/react";
 
 export function AdminHeader({
   sessionUser,
@@ -77,16 +77,13 @@ export function AdminHeader({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-slate-700" />
-            <DropdownMenuItem asChild>
-              <form action={signOutAction} className="w-full">
-                <button
-                  type="submit"
-                  className="flex items-center w-full px-2 py-1.5 text-sm rounded-sm hover:bg-transparent cursor-pointer"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
-                </button>
-              </form>
+            <DropdownMenuItem
+              className="flex items-center w-full px-2 py-1.5 text-sm rounded-sm hover:bg-slate-800 cursor-pointer"
+              onSelect={(e) => e.preventDefault()}
+              onClick={() => signOut({ redirectTo: "/auth/login" })}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

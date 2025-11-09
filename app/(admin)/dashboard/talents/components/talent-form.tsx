@@ -5,7 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import type { Category, Talent } from "@prisma/client";
 import { useFormStatus } from "react-dom";
 import { useActionState } from "react";
@@ -13,6 +19,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createTalent, updateTalent } from "@/lib/action";
 import { toast } from "sonner";
+import { Switch } from "@/components/ui/switch";
+import { ImageUploader } from "@/app/(admin)/components/image-uploader";
 
 type TalentWithCategories = Talent & {
   categories: Category[];
@@ -174,25 +182,27 @@ export function TalentForm({ categories, talent }: TalentFormProps) {
           <CardContent>
             <SubmitButton isEditMode={isEditMode} />
           </CardContent>
+          <CardFooter>
+            <div className="flex items-center space-x-2 mb-4">
+              <Switch
+                id="featured"
+                name="featured"
+                defaultChecked={talent?.featured ?? false}
+              />
+              <Label htmlFor="featured">Feature on homepage</Label>
+            </div>
+          </CardFooter>
         </Card>
 
         <Card className="bg-slate-900 border-slate-700 text-white">
           <CardHeader>
             <CardTitle>Profile Image</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <Label htmlFor="profileImage">Image URL</Label>
-            <Input
-              id="profileImage"
+          <CardContent>
+            <ImageUploader
               name="profileImage"
-              placeholder="https://... (Temporary)"
-              className="bg-slate-800 border-slate-700"
-              required
               defaultValue={talent?.profileImage}
             />
-            <p className="text-xs text-slate-400">
-              Note: We will add a file uploader here later.
-            </p>
           </CardContent>
         </Card>
 

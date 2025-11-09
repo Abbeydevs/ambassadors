@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { TalentForm } from "../../components/talent-form";
+import { ImageGalleryManager } from "../../components/image-gallery-manager";
+import { VideoReelManager } from "../../components/video-reel-manager";
 
 export default async function EditTalentPage({
   params,
@@ -16,6 +18,8 @@ export default async function EditTalentPage({
     where: { id },
     include: {
       categories: true,
+      images: { orderBy: { order: "asc" } },
+      reels: { orderBy: { order: "asc" } },
     },
   });
 
@@ -44,6 +48,10 @@ export default async function EditTalentPage({
       </div>
 
       <TalentForm categories={categories} talent={talent} />
+
+      <ImageGalleryManager talentId={talent.id} images={talent.images} />
+
+      <VideoReelManager talentId={talent.id} reels={talent.reels} />
     </div>
   );
 }
