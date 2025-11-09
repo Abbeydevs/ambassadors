@@ -1,30 +1,19 @@
 import { prisma } from "@/lib/prisma";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import Link from "next/link";
-import {
-  Film,
-  Music,
-  Users,
-  Mic,
-  Camera,
-  Palette,
-  Sparkles,
-} from "lucide-react";
-
-const iconMap: { [key: string]: React.ElementType } = {
-  actors: Film,
-  musicians: Music,
-  dancers: Users,
-  "voice-artists": Mic,
-  models: Camera,
-  artists: Palette,
-};
+import { CategoryCard } from "../components/category-card";
 
 export default async function CategoriesPage() {
   const categories = await prisma.category.findMany({
     orderBy: {
       name: "asc",
+    },
+    include: {
+      _count: {
+        select: {
+          talents: { where: { published: true } },
+        },
+      },
     },
   });
 
@@ -52,35 +41,13 @@ export default async function CategoriesPage() {
               </p>
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                {categories.map((category, index) => {
-                  const Icon = iconMap[category.slug] || Sparkles;
-
-                  return (
-                    <Link
-                      href={`/talents?category=${category.slug}`}
-                      key={category.id}
-                      className="group relative"
-                      style={{ animationDelay: `${index * 75}ms` }}
-                    >
-                      <div className="relative p-8 rounded-2xl bg-slate-900/50 border border-slate-700/50 backdrop-blur-sm hover:bg-slate-900/80 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500" />
-
-                        <div className="relative w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                          <Icon className="w-8 h-8 bg-linear-to-br from-blue-500 to-cyan-400 bg-clip-text text-transparent" />
-                        </div>
-
-                        <div className="relative space-y-3">
-                          <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                            {category.name}
-                          </h3>
-                          <p className="text-slate-400 line-clamp-2">
-                            {category.description || "Browse this category"}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
+                {categories.map((category, index) => (
+                  <CategoryCard
+                    key={category.id}
+                    category={category}
+                    index={index}
+                  />
+                ))}
               </div>
             )}
           </div>

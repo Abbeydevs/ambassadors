@@ -10,7 +10,7 @@ import TestimonialsSection from "./components/testimonial-section";
 import { prisma } from "@/lib/prisma";
 
 export default async function HomePage() {
-  const featuredTalents = await prisma.talent.findMany({
+  const featuredTalentsPromise = prisma.talent.findMany({
     where: {
       featured: true,
       published: true,
@@ -21,7 +21,7 @@ export default async function HomePage() {
     },
   });
 
-  const recentPosts = await prisma.blogPost.findMany({
+  const recentPostsPromise = prisma.blogPost.findMany({
     where: {
       published: true,
     },
@@ -31,12 +31,30 @@ export default async function HomePage() {
     },
   });
 
-  const heroTalent = await prisma.talent.findFirst({
+  const heroTalentPromise = prisma.talent.findFirst({
     where: {
       isHero: true,
       published: true,
     },
   });
+
+  const categoriesPromise = prisma.category.findMany({
+    include: {
+      _count: {
+        select: {
+          talents: { where: { published: true } },
+        },
+      },
+    },
+  });
+
+  const [featuredTalents, recentPosts, heroTalent, categories] =
+    await Promise.all([
+      featuredTalentsPromise,
+      recentPostsPromise,
+      heroTalentPromise,
+      categoriesPromise,
+    ]);
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -44,7 +62,7 @@ export default async function HomePage() {
       <main>
         <HeroSection heroImageUrl={heroTalent?.profileImage} />
         <FeaturedTalents talents={featuredTalents} />
-        <CategoriesSection />
+        <CategoriesSection categories={categories} />
         <StatsSection />
         <TestimonialsSection />
         <BlogPreview posts={recentPosts} />
