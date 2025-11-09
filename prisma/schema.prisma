@@ -47,6 +47,7 @@ model Talent {
   inquiries Inquiry[]
 
   featured  Boolean  @default(false)
+  isHero    Boolean  @default(false)
   views     Int      @default(0)
   published Boolean  @default(true)
 

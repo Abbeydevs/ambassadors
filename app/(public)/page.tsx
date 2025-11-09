@@ -31,11 +31,18 @@ export default async function HomePage() {
     },
   });
 
+  const heroTalent = await prisma.talent.findFirst({
+    where: {
+      isHero: true,
+      published: true,
+    },
+  });
+
   return (
     <div className="min-h-screen bg-slate-950">
       <Navbar />
       <main>
-        <HeroSection />
+        <HeroSection heroImageUrl={heroTalent?.profileImage} />
         <FeaturedTalents talents={featuredTalents} />
         <CategoriesSection />
         <StatsSection />

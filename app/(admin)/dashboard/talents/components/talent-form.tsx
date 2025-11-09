@@ -191,6 +191,17 @@ export function TalentForm({ categories, talent }: TalentFormProps) {
               />
               <Label htmlFor="featured">Feature on homepage</Label>
             </div>
+
+            <div className="flex items-center space-x-2 mb-4">
+              <Switch
+                id="isHero"
+                name="isHero"
+                defaultChecked={talent?.isHero ?? false}
+              />
+              <Label htmlFor="isHero" className="text-yellow-400">
+                Set as Homepage Hero
+              </Label>
+            </div>
           </CardFooter>
         </Card>
 

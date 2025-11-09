@@ -152,11 +152,19 @@ export async function createTalent(
   }
 
   const isFeatured = formData.get("featured") === "on";
+  const isHero = formData.get("isHero") === "on";
 
   try {
     const existing = await prisma.talent.findUnique({ where: { slug } });
     if (existing) {
       return "A talent with this name (or slug) already exists.";
+    }
+
+    if (isHero) {
+      await prisma.talent.updateMany({
+        where: { isHero: true },
+        data: { isHero: false },
+      });
     }
 
     await prisma.talent.create({
@@ -167,6 +175,7 @@ export async function createTalent(
         profileImage,
         skills,
         featured: isFeatured,
+        isHero: isHero,
 
         categories: {
           connect: categoryIds.map((id) => ({ id })),
@@ -223,8 +232,18 @@ export async function updateTalent(
   }
 
   const isFeatured = formData.get("featured") === "on";
+  const isHero = formData.get("isHero") === "on";
 
   try {
+    if (isHero) {
+      await prisma.talent.updateMany({
+        where: {
+          id: { not: id },
+          isHero: true,
+        },
+        data: { isHero: false },
+      });
+    }
     await prisma.talent.update({
       where: { id },
       data: {
@@ -233,6 +252,7 @@ export async function updateTalent(
         profileImage,
         skills,
         featured: isFeatured,
+        isHero: isHero,
 
         categories: {
           set: categoryIds.map((id) => ({ id })),
