@@ -1,6 +1,7 @@
 import { BlogPost } from "@prisma/client";
 import { Calendar, Clock, ArrowRight, Bookmark } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type BlogPreviewProps = {
   posts: BlogPost[];
@@ -43,10 +44,13 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
             </p>
           </div>
 
-          <button className="group flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+          <Link
+            href="/blog"
+            className="group flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+          >
             View All Posts
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -56,7 +60,8 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
             </p>
           ) : (
             posts.map((post, index) => (
-              <article
+              <Link
+                href={`/blog/${post.slug}`}
                 key={post.slug}
                 className="group cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -110,7 +115,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                     </div>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))
           )}
         </div>
