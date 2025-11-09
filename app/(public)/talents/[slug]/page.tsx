@@ -15,10 +15,11 @@ import { incrementTalentView } from "@/lib/action";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const talent = await prisma.talent.findUnique({
-    where: { slug: params.slug },
+    where: { slug: slug },
   });
 
   if (!talent) {
@@ -42,11 +43,12 @@ export async function generateMetadata({
 export default async function TalentProfilePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const talent = await prisma.talent.findUnique({
     where: {
-      slug: params.slug,
+      slug: slug,
       published: true,
     },
     include: {
