@@ -44,7 +44,7 @@ export default function CategoriesSection({
         <div className="text-center mt-12 lg:mt-16">
           <Button
             asChild
-            className="group px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50 inline-flex items-center gap-2"
+            className="group px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/50 inline-flex items-center gap-2"
           >
             <Link href="/categories">
               Browse All Categories

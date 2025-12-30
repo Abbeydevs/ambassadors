@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Card */}
-              <div className="relative h-full p-8 rounded-2xl bg-slate-900/50 border border-white/10 backdrop-blur-sm hover:bg-slate-900/80 hover:border-blue-500/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
+              <div className="relative h-full p-8 rounded-2xl bg-slate-900/50 border border-white/10 backdrop-blur-sm hover:bg-slate-900/80 hover:border-blue-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20">
                 {/* Quote Icon */}
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-linear-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg">
                   <Quote className="w-6 h-6 text-white" />

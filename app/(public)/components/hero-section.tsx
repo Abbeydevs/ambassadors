@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type HeroSectionProps = {
   heroImageUrl?: string | null;
@@ -11,7 +12,7 @@ export default function HeroSection({ heroImageUrl }: HeroSectionProps) {
     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1000&fit=crop";
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-linear-to-br from-slate-950 via-blue-950 to-slate-900 pt-28 pb-20">
+    <section className="relative min-h-screen flex items-center justify-center bg-linear-to-br from-slate-950 via-blue-950 to-slate-900 pt-28 pb-20 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
 
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e3a8a10_1px,transparent_1px),linear-gradient(to_bottom,#1e3a8a10_1px,transparent_1px)] bg-size-[4rem_4rem]" />
@@ -41,13 +42,19 @@ export default function HeroSection({ heroImageUrl }: HeroSectionProps) {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50 flex items-center justify-center gap-2">
+              <Link
+                href="https://marketplace.ambassadorstalentsagency.com/"
+                className="cursor-pointer group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50 flex items-center justify-center gap-2"
+              >
                 Browse Talents
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-white/20">
+              </Link>
+              <Link
+                href="/about"
+                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
@@ -79,7 +86,7 @@ export default function HeroSection({ heroImageUrl }: HeroSectionProps) {
             <div className="relative aspect-3/4 max-w-md mx-auto lg:max-w-none">
               <div className="absolute inset-0 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl backdrop-blur-sm border border-white/10" />
 
-              <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl shadow-blue-500/25 transform hover:scale-[1.02] transition-transform duration-500">
+              <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl shadow-blue-500/25 transform transition-transform duration-500">
                 <Image
                   src={displayImage}
                   alt="Featured Talent"

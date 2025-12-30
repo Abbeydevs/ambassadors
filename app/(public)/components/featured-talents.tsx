@@ -53,7 +53,7 @@ export default function FeaturedTalents({ talents }: FeaturedTalentsProps) {
                 className="group relative"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative aspect-3/4 rounded-2xl overflow-hidden bg-slate-900 border border-white/10 hover:border-blue-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/25">
+                <div className="relative aspect-3/4 rounded-2xl overflow-hidden bg-slate-900 border border-white/10 hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/25">
                   <Image
                     src={talent.profileImage}
                     alt={talent.name}

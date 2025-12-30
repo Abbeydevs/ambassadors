@@ -1,5 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TrendingUp, Award, Globe, Zap } from "lucide-react";
+
+function Users(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
 
 export default function StatsSection() {
   const stats = [
@@ -32,28 +53,6 @@ export default function StatsSection() {
       color: "from-green-500 to-emerald-400",
     },
   ];
-
-  function Users(props: any) {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        {...props}
-      >
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    );
-  }
 
   return (
     <section className="py-20 lg:py-32 bg-slate-900 relative overflow-hidden">
@@ -88,7 +87,7 @@ export default function StatsSection() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Card */}
-                <div className="relative p-8 rounded-2xl bg-slate-950/50 border border-white/10 backdrop-blur-sm hover:bg-slate-950/80 hover:border-blue-500/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
+                <div className="relative p-8 rounded-2xl bg-slate-950/50 border border-white/10 backdrop-blur-sm hover:bg-slate-950/80 hover:border-blue-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20">
                   {/* Gradient Background */}
                   <div
                     className={`absolute inset-0 bg-linear-to-br ${stat.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`}

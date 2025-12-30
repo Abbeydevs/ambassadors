@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import {
   Film,
@@ -18,7 +17,14 @@ type CategoryWithCount = Category & {
   };
 };
 
-const styleMap: { [key: string]: any } = {
+const styleMap: {
+  [key: string]: {
+    icon: React.ElementType;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+  };
+} = {
   actor: {
     icon: Film,
     color: "from-blue-500 to-cyan-400",
@@ -82,7 +88,7 @@ export function CategoryCard({ category, index }: CardProps) {
       style={{ animationDelay: `${index * 75}ms` }}
     >
       <div
-        className={`relative p-8 h-full rounded-2xl bg-slate-900/50 border ${style.borderColor} backdrop-blur-sm hover:bg-slate-900/80 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 overflow-hidden`}
+        className={`relative p-8 h-full rounded-2xl bg-slate-900/50 border ${style.borderColor} backdrop-blur-sm hover:bg-slate-900/80 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 overflow-hidden`}
       >
         <div
           className={`absolute top-0 right-0 w-32 h-32 bg-linear-to-br ${style.color} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`}
@@ -93,7 +99,7 @@ export function CategoryCard({ category, index }: CardProps) {
         >
           <Icon
             className={`w-8 h-8 bg-linear-to-br ${style.color} bg-clip-text text-transparent`}
-            style={{ fill: "url(#gradient)" }}
+            fill="url(#gradient)"
           />
           <svg width="0" height="0">
             <defs>

@@ -66,7 +66,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                 className="group cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative h-full rounded-2xl bg-slate-900/50 border border-white/10 hover:border-blue-500/50 overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/20">
+                <div className="relative h-full rounded-2xl bg-slate-900/50 border border-white/10 hover:border-blue-500/50 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20">
                   <div className="relative aspect-16/10 overflow-hidden">
                     <Image
                       src={post.featuredImage || "/placeholder-blog.png"}
