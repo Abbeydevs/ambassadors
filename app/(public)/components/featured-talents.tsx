@@ -73,12 +73,8 @@ export default function FeaturedTalents({ talents }: FeaturedTalentsProps) {
                       <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
                         {talent.name}
                       </h3>
-                      {/* <p className="text-blue-300 text-sm font-medium">
-                        {talent.category}
-                      </p> */}
                     </div>
 
-                    {/* Stats */}
                     <div className="flex items-center justify-between pt-3 border-t border-white/10">
                       <div className="flex items-center gap-1.5 text-slate-400 text-sm">
                         <Eye className="w-4 h-4" />

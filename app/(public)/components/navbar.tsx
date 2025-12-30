@@ -20,7 +20,6 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-lg border-b border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center font-bold text-white text-xl">
               A
@@ -30,7 +29,6 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -44,7 +42,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-4">
             <Button className="p-2 text-slate-300 hover:text-white transition-colors">
               <Search className="w-5 h-5" />
@@ -54,7 +51,6 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
@@ -64,7 +60,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <div className="lg:hidden bg-slate-900/95 backdrop-blur-lg border-t border-white/10">
           <div className="container mx-auto px-4 py-6 space-y-4">
